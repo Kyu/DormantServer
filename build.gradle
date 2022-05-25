@@ -1,0 +1,29 @@
+plugins {
+    id 'java'
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
+}
+
+group 'me.preciouso'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+}
+
+dependencies {
+    compileOnly 'net.md-5:bungeecord-api:1.18-R0.1-SNAPSHOT'
+
+    implementation platform('com.amazonaws:aws-java-sdk-bom:1.12.225')
+    implementation 'com.amazonaws:aws-java-sdk-ec2'
+    // implementation 'com.amazonaws:aws-java-sdk-core'
+}
+
+
+shadowJar {
+    // minimize()
+}
+
+jar {
+    // shadowJar
+}

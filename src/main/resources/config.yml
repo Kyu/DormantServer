@@ -1,0 +1,11 @@
+server:
+  name: lobby
+  port: 25565
+aws:
+  login:
+    access_key_id: YOUR_AWS_ACCESS_KEY_ID
+    aws_secret_access_key: YOUR_AWS_SECRET_ACCESS_KEY
+  instance:
+    id: INSTANCE_ID_FOR_SERVER
+kick_message: Server is down. Ask an admin to bring it back up!
+wait_message: Spinning up server! This will take a few seconds.
