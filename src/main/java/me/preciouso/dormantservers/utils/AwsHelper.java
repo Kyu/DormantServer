@@ -49,7 +49,13 @@ public class AwsHelper {
     }
 
     public void startEc2Instance() {
-        new StartInstancesRequest(Collections.singletonList(instanceId));
+        StartInstancesRequest req = new StartInstancesRequest().withInstanceIds(instanceId);
+        ec2Client.startInstances(req); // TODO use DryRun to check if it actually worked?
+    }
+
+    public void stopEc2Instance() {
+        StopInstancesRequest req = new StopInstancesRequest(Collections.singletonList(instanceId));
+        ec2Client.stopInstances(req);
     }
 
     public void refreshEc2Instance() {

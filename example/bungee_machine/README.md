@@ -1,23 +1,13 @@
 # Bungee Machine Setup  
 
 Run the script in `setup.sh`, after updating the links not provided. 
+What the script does is:   
 
-A sample `config.yml` looks like this:  
+- Downloads BungeeCord, and creates a script to run it  
+- Downloads the DormantServer plugin, and preloads a config to it 
 
-```yml
-server:
-  name: lobby
-  port: 25565
-aws:
-  login:
-    access_key_id: YOUR_AWS_ACCESS_KEY_ID
-    aws_secret_access_key: YOUR_AWS_SECRET_ACCESS_KEY
-  instance:
-    id: INSTANCE_ID_FOR_SERVER
-kick_message: Server is down. Ask an admin to bring it back up!
-wait_message: Spinning up server! This will take a few seconds.
-```  
+A sample `config.yml` can be found in the main readme file of this repository. 
 
-Instead of using a download link, you can make the file yourself, as it's generally not 
+Instead of using a download link, you can make the file yourself, or send it over via SFTP, as it's generally not 
 a good idea to have your API keys floating around the internet.  
 

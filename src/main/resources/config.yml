@@ -1,6 +1,10 @@
 server:
   name: lobby
   port: 25565
+  max_idle: 30
+  max_ping_timeout: 300
+  check_idle_delay: 5
+  boot_delay_seconds: 30
 aws:
   login:
     access_key_id: YOUR_AWS_ACCESS_KEY_ID

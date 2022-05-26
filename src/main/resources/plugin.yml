@@ -1,6 +1,6 @@
 name: DormantServers
 main: me.preciouso.dormantservers.DormantServers
-version: 1.0
+version: 1.1
 author: github.com/Kyu
 description: Plugin to shutdown server when not in use, and reboot server upon request
 permissions:

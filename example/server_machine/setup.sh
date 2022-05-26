@@ -16,7 +16,15 @@ echo "eula=true" > eula.txt
 
 echo "online-mode: false" > server.properties
 echo "connection-throttle: -1" > bukkit.yml
-echo "java -Xms1G -Xmx2G -XX:+UseG1GC -DIReallyKnowWhatIAmDoingISwear -jar Server.jar nogui" > start.sh
+
+# The following line createst the startup script. You can edit the min and max ram as neeeded
+# https://stackoverflow.com/questions/3349105/how-can-i-set-the-current-working-directory-to-the-directory-of-the-script-in-ba
+# " and $ are excaped using \
+# % is escaped using %%, just so it doesn't literally print the bash command outputs
+
+# All this nonsense is here for when you make it into a reboot cronjob, bash has to cd into the server directory first
+printf "cd \"\${0%%/*}\"\njava -Xms1G -Xmx2G -XX:+UseG1GC -DIReallyKnowWhatIAmDoingISwear -jar Server.jar nogui" > start.sh
+
 
 # Allow connections to 25565
 sudo ufw allow 25565

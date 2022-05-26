@@ -13,6 +13,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 
 public class DormantServers extends Plugin {
@@ -50,18 +51,21 @@ public class DormantServers extends Plugin {
             getLogger().log(Level.WARNING, "AWS credentials could not be validated. Plugin will not continue to load.");
         } finally {
             String serverName = this.getConfig().getString("server.name");
-            if (! new LobbyChecker(this).isLobbyAlreadyUp(serverName)) { // Server is down
+            if (! new LobbyChecker(this).isHostNameUp(serverName)) { // Server (as defined in default bungee config) is down
 
-                Instance myInst = AwsHelper.build().getMyEc2Instance();
-                if (myInst != null) { // Running: 16, Stopped: 80 (?)
+                Instance myInst = AwsHelper.build().getMyEc2Instance(); // Try to find the server if its up
+                if (myInst != null && myInst.getState().getCode() == 16) { // Running: 16, Stopped: 80 (?)
                     String hostname = myInst.getPublicIpAddress();
                     new LobbyChecker(this).updateServer(serverName, hostname);
                 }
             }
         }
 
+        int checkDelay = this.getConfig().getInt("server.check_idle_delay", 5);
+        getProxy().getScheduler().schedule(this, new ServerMonitor(this), checkDelay, checkDelay, TimeUnit.MINUTES);
+
         getProxy().getPluginManager().registerListener(this, new PlayerAttemptJoinListener(this));
-        getLogger().info("Plugin loaded!");
+        getLogger().log(Level.FINE,"Plugin loaded!");
     }
 
     public Configuration getConfig() {
